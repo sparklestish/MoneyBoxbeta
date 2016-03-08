@@ -1,0 +1,100 @@
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>Sign Up</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" type="text/css" href="css/normalize.css"> 
+<link rel="stylesheet" type="text/css" href="css/framework.css"> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"> 
+<script src="js/webfont.js"></script>
+<script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script> 
+<script type="text/javascript" src="js/modernizr.js"></script> 
+
+<link rel="shortcut icon" type="image/x-icon" href="images/logo.ico"> 
+<link rel="apple-touch-icon" href="images/logo.ico"> 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+<link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+  <script src="js/jq.js"></script>
+  <script type="text/javascript" language="javascript">
+
+   $(document).ready(function() {
+ 
+  function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+
+var phone=getQueryVariable("phone");
+var password= getQueryVariable("password") ;
+
+
+// alert(phone);
+// alert(password);
+//var anchor = document.getElementById('stage1');
+ document.getElementById('phone').value = phone;
+  document.getElementById('phoneforloan').value = phone;
+  //alert(dog);
+//var id = $('#stage1').attr('id');
+     // $("#2").click(function(event){
+          $.getJSON('http://moneybox.envisiongh.net/process_signup.php?phone='+phone+' & password='+password, function(jd) {  
+       $('#showmess').append('<p>'+jd.firstname+'</p>');
+     // $('input[name=phone]').val(jd.phone);
+    // document.getElementById('phone').value = phone;
+
+     //$('#phone').val(+jd.phone+);
+             //     $('#stage2').append('<p>  ' + jd.what + '</p>');
+             // $('#stage3').append('<p > ' + jd.date+ ' at ' + jd.time+ ' | Venue:' + jd.location+'</p>');
+            
+                
+             // $('#stage4').append('<p>  ' + jd.detail+ '</p>');
+       
+          //});
+      });
+   });
+   </script>
+</head>
+<body> 
+<section class="w-section mobile-wrapper" style="height: 850px;"> 
+<div class="page-content bg-gradient" id="main-stack" data-scroll="0" style="padding-top: 80px;"> 
+
+<div class="body padding" style="margin-top: -140px;"> 
+<!-- <div class="w-nav navbar transparent" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1"> 
+<div class="w-container"> 
+<div class="wrapper-mask" data-ix="menu-mask"></div>
+<a class="w-inline-block navbar-button"  href="login.html" data-load="1"> 
+<div class="navbar-button-icon icon ion-ios-close-empty"></div>
+</a> 
+</div>
+</div> -->
+<div class="logo-login" style= "margin-top: 30px;"></div>
+
+<div class="bottom-section padding"  style="padding-bottom: 80px;"> 
+<div class="w-form"> 
+
+ </div>
+ </div>
+ </div>
+ </div>
+<!--  <div class="page-content loading-mask" id="new-stack">
+  <div class="loading-icon"> 
+  <div class="navbar-button-icon icon ion-load-d">
+  </div>
+  </div>
+  </div> -->
+  </section> 
+  
+
+  	<!-- jquery validation plugin include -->
+  	
+	<script src="js/script.js"></script>
+	<script src="js/validation.min.js"></script>
+	<script src="js/scripts.js"></script>
+  </body>
+  </html>

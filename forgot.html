@@ -1,0 +1,136 @@
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" type="text/css" href="css/normalize.css"> 
+<link rel="stylesheet" type="text/css" href="css/framework.css"> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"> 
+<script src="js/webfont.js"></script>
+<script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script> 
+<script type="text/javascript" src="js/modernizr.js"></script> 
+<link rel="shortcut icon" type="image/x-icon" href="images/logo.ico"> 
+<link rel="apple-touch-icon" href="images/logo.ico"> 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+<link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+
+
+<!--Guardian Js Validation Files -->
+<link href="css/guardian.css" rel="stylesheet" type="text/css"/>
+
+<script src="js/jq.js"></script>
+ 
+ <!-- Include required JS files -->
+<script type="text/javascript" src="js/shCore.js"></script>
+<!-- End Validation Files -->
+	</head>
+<body> 
+<section class="w-section mobile-wrapper"> 
+<div class="page-content bg-gradient" id="main-stack" data-scroll="0"> 
+<div class="body padding" style="padding-top: 10px;"> 
+<div class="logo-login"></div>
+<div class="bottom-section padding" style="padding-bottom: 130px;"> 
+<div class="w-form" id="box"> 
+
+ <div class="w-form-done"></div>
+
+<form id="loginform" method="post"> 
+<div> 
+<label class="label-form light" for="tel-field">Email Address</label> 
+<input class="w-input input-form light" id="email" type="email" name="email"   placeholder="enter email address" required /> 
+
+<div class="separator-fields"></div>
+</div>
+
+<input class="w-button action-button" type="submit" name="forgot" value="forgot"  id="forgot"> 
+<div class="separator-button">
+	
+</div>
+<a class="link-upper" href="login.html" data-load="1">Want to Login? <strong class="b-link">Login</strong></a> 
+</form> 
+</div>
+</div>
+</div>
+</div>
+<div class="page-content loading-mask"> 
+<div class="loading-icon"> 
+<div class="navbar-button-icon icon ion-load-d"></div>
+</div>
+</div>
+</section> 
+
+<script type="text/javascript">
+ $(document).ready(function()
+ {
+    //Login Function
+    $("#forgot").click(function(){
+    	
+//     					$( "#loginform" ).click(function( event ) {
+//   event.preventDefault();
+ 
+// });
+    
+    	var email=$("#email").val();
+
+    	//var dataString="phone="+phone+"&password="+password;
+    	if($.trim(email).length>0)
+		{
+			$.ajax({
+				type: "POST",
+				url: "http://moneyboxapp.envisiongh.net/forgot.php",
+				data: "email=" + $("#email").val(),
+				crossDomain: true,
+				cache: false,
+				dataType:'json',
+				beforeSend: function(){ $("#forgot").val('generating reset link...');},
+				success: function(data){
+					if(data.success == false) 
+				        {  
+				          $(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#E21C3C");
+						$(".w-form-done").html('<p style="color: #ffffff;">Your Password could not be generated.</p>');
+						//alert("Login error");
+						setTimeout(function() {
+						$('.w-form-done').fadeOut('slow');
+						}, 30000);
+						$("#forgot").val('Send Reset Link');
+				        } 
+				        else { 
+							$(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#00b233");
+						$(".w-form-done").html('<p style="color: #ffffff;">Your Password has been sent to your email</p>');
+						$("#forgot").val('Send Reset Link');
+						var URL = "login.html";
+						setTimeout(function(){ window.location = URL; }, 2000);
+				              
+				            }  
+				}
+			});
+		}return false;
+
+    });
+ });
+ </script>
+
+<script src="js/jquery.guardian-1.0.min.js"></script>
+	
+		<script>
+			SyntaxHighlighter.defaults['gutter'] = true;
+			SyntaxHighlighter.defaults['smart-tabs'] = true;
+			SyntaxHighlighter.defaults['toolbar'] = false;
+			SyntaxHighlighter.all()
+
+
+			//example 1 
+			$('#loginform').guardian();
+			
+						
+		</script> 		
+<script type="text/javascript" src="js/scripts.js"></script> 
+        <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>Sign Up</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" type="text/css" href="css/normalize.css"> 
+<link rel="stylesheet" type="text/css" href="css/framework.css"> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"> 
+<script src="js/webfont.js"></script>
+<script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script> 
+<script type="text/javascript" src="js/modernizr.js"></script> 
+
+<link rel="shortcut icon" type="image/x-icon" href="images/logo.ico"> 
+<link rel="apple-touch-icon" href="images/logo.ico"> 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+<link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+ <script src="js/jq.js"></script>
+</head>
+<body> 
+<section class="w-section mobile-wrapper"> 
+<div class="page-content bg-gradient" id="main-stack" data-scroll="0"> 
+<div class="body padding" style="padding-top: 10px;"> 
+<div class="logo-login"></div>
+<div class="bottom-section padding" style="padding-bottom: 130px;"> 
+<div class="w-form" id="box"> 
+
+ <div class="w-form-done"></div>
+
+<div id="change">
+<form  name="email-form" method="get"> 
+<div>
+ <label class="label-form light" for="email-field">PHONE NUMBER</label> 
+ <input class="w-input input-form light" placeholder="enter your phonenumber" id="phone" max="10" maxlength="10" type="text" name="phone" data-name="phone" required="required"> 
+
+ <div class="separator-fields"></div>
+ </div>
+
+ <div>
+ <label class="label-form light" >Activation Code</label> 
+ <input class="w-input input-form light" placeholder="enter the activation code you received" id="code" type="text" name="code" required="required"> 
+
+ <div class="separator-fields"></div>
+ </div>
+
+ <div class="separator-button-input"></div>
+ <button class="w-button action-button" type="submit" id="activate">Activate Account</button>
+ <div class="separator-button"></div>
+ <a class="link-upper" href="login.html" data-load="1">Already have an account? 
+ <strong class="b-link">Sign in</strong></a> 
+ </form> 
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ <div class="page-content loading-mask" id="new-stack">
+  <div class="loading-icon"> 
+  <div class="navbar-button-icon icon ion-load-d">
+  </div>
+  </div>
+  </div>
+  </section> 
+  
+<script type="text/javascript">
+ $(document).ready(function()
+ {
+    //Login Function
+    $("#activate").click(function(){
+    	
+//     					$( "#loginform" ).click(function( event ) {
+//   event.preventDefault();
+ 
+// });
+    
+    	var phone=$("#phone").val();
+    	var code=$("#code").val();
+    	//var dataString="phone="+phone+"&password="+password;
+    	if($.trim(phone).length>0 & $.trim(code).length>0)
+		{
+			$.ajax({
+				type: "GET",
+				url: "http://moneyboxapp.envisiongh.net/activate.php",
+				data: "phone=" + $("#phone").val()+"&code=" + $("#code").val(),
+				crossDomain: true,
+				cache: false,
+				dataType:'json',
+				beforeSend: function(){ $("#activate").val('Validating your account...');},
+				success: function(data){
+					if(data.success == false) 
+				        {  
+				          $(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#E21C3C");
+						$(".w-form-done").html('<p style="color: #ffffff;">There has been an error in activationg your account <br>.Please contact support.</p>');
+						//alert("Login error");
+						setTimeout(function() {
+						$('.w-form-done').fadeOut('slow');
+						}, 30000);
+						$("#activate").val('Activate');
+				        } 
+				        else { 
+							$(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#00b233");
+						$(".w-form-done").html('<p style="color: #ffffff;">Your Account has been Activated, redirecting to login page now ...</p>');
+						var URL = "login.html";
+						setTimeout(function(){ window.location = URL; }, 2000);
+				              
+				            }  
+				}
+			});
+		}return false;
+
+    });
+ });
+ </script>
+
+
+
+  	<!-- jquery validation plugin include -->
+  	
+	<script src="js/validation.min.js"></script>
+	<script src="js/scripts.js"></script>
+  </body>
+  </html>

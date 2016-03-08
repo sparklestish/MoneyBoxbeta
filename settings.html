@@ -1,0 +1,264 @@
+<html>
+<head>
+ <meta charset="utf-8"> 
+ <title>Settings</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" type="text/css" href="css/normalize.css"> 
+ <link rel="stylesheet" type="text/css" href="css/framework.css">
+ <link rel="stylesheet" type="text/css" href="css/styles.css"> 
+ <script src="js/webfont.js"></script> <script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script>
+ <script type="text/javascript" src="js/modernizr.js"></script> 
+ <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico">
+ <link rel="apple-touch-icon" href="images/logo.ico"> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ <link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+ <script type="text/javascript" src="js/jq.js"></script> 
+  <script type="text/javascript" language="javascript">
+
+   $(document).ready(function() {
+ 
+//   function getQueryVariable(variable)
+// {
+//        var query = window.location.search.substring(1);
+//        var vars = query.split("&");
+//        for (var i=0;i<vars.length;i++) {
+//                var pair = vars[i].split("=");
+//                if(pair[0] == variable){return pair[1];}
+//        }
+//        return(false);
+// }
+//var phone = window.location.search.substring(7);
+  function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
+
+var phone=getQueryVariable("phone");
+var password= getQueryVariable("password") ;
+//var phone=getQueryVariable("phone");
+//var password= getQueryVariable("password") ;
+
+
+ //alert(phone);
+// alert(password);
+//var anchor = document.getElementById('stage1');
+   
+//var id = $('#stage1').attr('id');
+     // $("#2").click(function(event){
+          $.getJSON('http://moneybox.envisiongh.net/profile.php?phone='+phone+' & password='+password, function(jd) {  
+          	 $('#username').val(jd.username);
+       $('#firstname').val(jd.firstname);
+       $('#lastname').val(jd.lastname);
+          $('#email').val(jd.email);
+           $('#phone').val(jd.phone);
+             $('#password').val(jd.password);
+        //alert(phone);
+
+        var homelink = document.getElementById('homelink'); //or grab it by tagname etc
+		homelink.href = "home.html?phone="+jd.phone+"&password="+jd.password;
+
+
+		 var settingslink = document.getElementById('settingslink'); //or grab it by tagname etc
+		settingslink.href = "settings.html?phone="+jd.phone+"&password="+jd.password;
+		
+			 var checkstatuslink = document.getElementById('checkstatuslink'); //or grab it by tagname etc
+		checkstatuslink.href = "checkstatus.html?phone="+jd.phone+"&password="+jd.password;
+ //document.getElementById('phone').value = jd.phone;
+             //     $('#stage2').append('<p>  ' + jd.what + '</p>');
+             // $('#stage3').append('<p > ' + jd.date+ ' at ' + jd.time+ ' | Venue:' + jd.location+'</p>');
+            
+                
+             // $('#stage4').append('<p>  ' + jd.detail+ '</p>');
+       
+          //});
+      });
+   });
+   </script>
+ </head>
+<body>
+ <section class="w-section mobile-wrapper"> 
+ <div class="page-content" id="main-stack"> 
+ <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1"> 
+ <div class="w-container"> 
+ <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">
+ <div class="nav-menu-header"> 
+ <div class="logo"><img style="margin-left:-70px;" src="images/logo.png" width="50px"  height="50px" alt="Money Box Logo"> Money Box</div>
+ </div>
+ <a class="w-clearfix w-inline-block nav-menu-link" id="homelink" href="" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-ios-home-outline"></div>
+ </div>
+ <div class="nav-menu-titles">Home Page</div></a>  
+ 
+  <a class="w-clearfix w-inline-block nav-menu-link" id="checkstatuslink"  href="" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-android-checkmark-circle"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Check Status</div></a> 
+ 
+ <a class="w-clearfix w-inline-block nav-menu-link" href="#" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-social-facebook-outline"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Social Media</div></a> 
+ 
+   <a class="w-clearfix w-inline-block nav-menu-link" href="#" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-ios-color-wand"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Auction</div></a> 
+ 
+ 
+ 
+ <a class="w-clearfix w-inline-block nav-menu-link" id="settingslink" href="" data-load="1"> 
+ <div class="icon-list-menu"> <div class="icon ion-ios-gear-outline"></div>
+ </div>
+ <div class="nav-menu-titles">Settings</div></a> 
+ <a class="w-clearfix w-inline-block nav-menu-link last" href="terms.html" data-load="1">
+ <div class="icon-list-menu">
+ <div class="icon ion-ios-bookmarks-outline"></div>
+ </div>
+ <div class="nav-menu-titles">Terms and Conditions</div></a> 
+ 
+<!--     <a class="w-clearfix w-inline-block nav-menu-link" href="login.html" data-load="3"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-ios-download-outline"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Logout</div></a>  -->
+ 
+ 
+ <div class="separator-bottom"></div><div class="separator-bottom"></div>
+ <div class="separator-bottom"></div>
+ </nav> 
+ <div class="wrapper-mask" data-ix="menu-mask"></div>
+ <div class="navbar-title">My Profile</div>
+ <div class="w-nav-button navbar-button left" id="menu-button" data-ix="hide-navbar-icons"> 
+ <div class="navbar-button-icon home-icon">
+ <div class="bar-home-icon top"></div>
+ <div class="bar-home-icon middle"></div><div class="bar-home-icon bottom"></div></div></div></div></div><div class="body padding"> <div class="w-form"> 
+
+ <form id="email-form"  method="get"> 
+ <div id="duu"></div>
+ <div class="w-form-done"></div>
+ <div class="separator-button-input"></div>
+
+  <div> <label class="label-form" >USER NAME</label> 
+ <input class="w-input input-form" id="username"  type="text" name="username" > <div class="separator-fields"></div>
+ </div>
+ 
+
+
+ <div> <label class="label-form" >FIRST NAME</label> 
+ <input class="w-input input-form" id="firstname" type="text" name="firstname" > <div class="separator-fields"></div>
+ </div>
+ 
+ <div> <label class="label-form" >LAST NAME</label> 
+ <input class="w-input input-form" id="lastname"  type="text" name="lastname" > <div class="separator-fields"></div>
+ </div>
+ 
+ 
+ <div>
+ <label class="label-form" for="email-field">EMAIL</label> 
+ <input class="w-input input-form" id="email" type="email" name="email"> <div class="separator-fields"></div>
+ </div>
+ <div> 
+ <label class="label-form" for="password-ield">PASSWORD</label>
+ <input class="w-input input-form" id="password"  type="password" name="password"  required="required"> <div class="separator-fields"></div>
+ </div>
+
+ 
+ <div>
+ <label class="label-form" for="email-field">PHONE</label> 
+ <input class="w-input input-form" id="phone" type="text" name="phone" readonly> <div class="separator-fields"></div>
+ </div>
+
+ <div class="separator-fields"></div>
+ <div> <div class="separator-fields">
+ </div>
+ </div>
+ 
+ 
+<input class="w-button action-button" type="submit" name="update" value="Update" id="update" data-wait="Please wait..."> 
+ </form>
+ <div class="w-form-done"> <p>Thank you! Your submission has been received!</p></div>
+ <div class="w-form-fail"> <p>Oops! Something went wrong while submitting the form</p></div>
+ </div>
+ </div>
+ </div>
+<!--  <div class="page-content loading-mask" id="new-stack"> <div class="loading-icon">
+ <div class="navbar-button-icon icon ion-load-d"></div>
+ </div>
+ </div> -->
+ </section> 
+ 
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+    //Login Function
+    $("#update").click(function(){
+    	
+//     					$( "#loginform" ).click(function( event ) {
+//   event.preventDefault();
+ 
+// });
+    
+    	var username=$("#username").val();
+		var firstname=$("#firstname").val();
+		var lastname=$("#lastname").val();
+		var email=$("#email").val();
+    	var password=$("#password").val();
+    	//var dataString="phone="+phone+"&password="+password;
+    	if($.trim(phone).length>0 & $.trim(password).length>0)
+		{
+			$.ajax({
+				type: "GET",
+				url: "http://moneyboxapp.envisiongh.net/settings.php",
+				data: "username=" + $("#username").val()+"&firstname=" + $("#firstname").val()+"&lastname=" + $("#lastname").val()+"&email=" + $("#email").val()+"&password=" + $("#password").val()+"&phone=" + $("#phone").val(),
+				crossDomain: true,
+				cache: false,
+				dataType:'json',
+				beforeSend: function(){ $("#update").val('updating...');},
+				success: function(data){
+					if(data.success == false) 
+				        {  
+				          $(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#E21C3C");
+						$(".w-form-done").html('<p style="color: #ffffff;">Update was not successful.</p>');
+						//alert("Login error");
+						setTimeout(function() {
+						$('.w-form-done').fadeOut('slow');
+						}, 30000);
+						$("#update").val('Update');
+				        } 
+				        else { 
+							$(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#00b233");
+						$(".w-form-done").html('<p style="color: #ffffff;">Account details updated</p>');
+						
+				              
+				            }  
+				}
+			});
+		}return false;
+
+    });
+ });
+ </script>
+
+<script type="text/javascript" src="js/framework.js"></script> 
+<script type="text/javascript" src="js/scripts.js"></script>
+ </html>

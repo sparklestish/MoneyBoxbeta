@@ -1,0 +1,159 @@
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" type="text/css" href="css/normalize.css"> 
+<link rel="stylesheet" type="text/css" href="css/framework.css"> 
+<link rel="stylesheet" type="text/css" href="css/styles.css"> 
+<script src="js/webfont.js"></script>
+<script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script> 
+<script type="text/javascript" src="js/modernizr.js"></script> 
+<link rel="shortcut icon" type="image/x-icon" href="images/logo.ico"> 
+<link rel="apple-touch-icon" href="images/logo.ico"> 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+<link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+
+
+<!--Guardian Js Validation Files -->
+<link href="css/guardian.css" rel="stylesheet" type="text/css"/>
+
+<script src="js/jq.js"></script>
+ 
+ <!-- Include required JS files -->
+<script type="text/javascript" src="js/shCore.js"></script>
+<!-- End Validation Files -->
+	</head>
+<body> 
+<section class="w-section mobile-wrapper"> 
+<div class="page-content bg-gradient" id="main-stack" data-scroll="0"> 
+<div class="body padding" style="padding-top: 10px;"> 
+<div class="logo-login"></div>
+<div class="bottom-section padding" style="padding-bottom: 130px;"> 
+<div class="w-form" id="box"> 
+
+ <div class="w-form-done"></div>
+
+<form id="loginform" name="login-form" method="GET"> <div> 
+<label class="label-form light" for="tel-field">PHONENUMBER</label> 
+<input class="w-input input-form light" id="phone" type="text" name="phone" max="10" maxlength="10"  placeholder="enter phonenumber" data-name="phone" required> 
+<div class="errormess"></div>
+<div class="separator-fields"></div>
+</div>
+<div> 
+<label class="label-form light" for="email">PASSWORD</label> 
+<div class="block-input-combined"> 
+<input class="w-input input-form light left" id="password" type="password" minlength="8"  placeholder="enter password" name="password" data-name="password" required>
+<div class="errormess"></div>
+
+<a class="right-input-link" href="forgot.html" data-load="1">Forgot Password</a> 
+</div>
+<div class="separator-button-input">
+	
+</div>
+</div>
+<input class="w-button action-button" type="submit" name="submit" value="Login" id="login" data-wait="Please wait..."> 
+<div class="separator-button">
+	
+</div>
+<a class="link-upper" href="signup.html" data-load="1">Don't have an account? <strong class="b-link">Sign Up</strong></a> 
+</form> 
+</div>
+</div>
+</div>
+</div>
+<div class="page-content loading-mask"> 
+<div class="loading-icon"> 
+<div class="navbar-button-icon icon ion-load-d"></div>
+</div>
+</div>
+</section> 
+
+<script type="text/javascript">
+ $(document).ready(function()
+ {
+    //Login Function
+    $("#login").click(function(){
+    	
+//     					$( "#loginform" ).click(function( event ) {
+//   event.preventDefault();
+ 
+// });
+    
+    	var phone=$("#phone").val();
+    	var password=$("#password").val();
+    	//var dataString="phone="+phone+"&password="+password;
+    	if($.trim(phone).length>0 & $.trim(password).length>0)
+		{
+			$.ajax({
+				type: "GET",
+				url: "http://moneyboxapp.envisiongh.net/process.php",
+				data: "phone=" + $("#phone").val()+"&password=" + $("#password").val(),
+				crossDomain: true,
+				cache: false,
+				dataType:'json',
+				beforeSend: function(){ $("#login").val('Connecting...');},
+				success: function(data){
+					if(data.success == false) 
+				        {  
+				          $(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#E21C3C");
+						$(".w-form-done").html('<p style="color: #ffffff;">You have entered a wrong phone number or password. Please try again</p>');
+						//alert("Login error");
+						setTimeout(function() {
+						$('.w-form-done').fadeOut('slow');
+						}, 2000);
+						$("#login").val('Sign In');
+				        } 
+						else if(data.success == 'null') 
+				        {  
+				          $(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#E21C3C");
+						$(".w-form-done").html('<p style="color: #ffffff;">You have not yet activated your account.Please activate now.</p>');
+						//alert("Login error");
+						var URL1 = "activate.html";
+						setTimeout(function() {
+						$('.w-form-done').fadeOut('slow');
+						window.location = URL1; 
+						}, 2000);
+						$("#login").val('Sign In');
+				        } 
+				        else { 
+							$(".w-form-done").css("display", "block");
+						$(".w-form-done").css("margin-bottom", "15px");
+						$(".w-form-done").css("padding", "10px");
+						$(".w-form-done").css("background-color", "#00b233");
+						$(".w-form-done").html('<p style="color: #ffffff;">Account details validated, logging you in now ...</p>');
+						var URL = "home.html?phone="+phone+"&password="+password;
+						setTimeout(function(){ window.location = URL; }, 2000);
+				              
+				            }  
+				}
+			});
+		}return false;
+
+    });
+ });
+ </script>
+
+<script src="js/jquery.guardian-1.0.min.js"></script>
+	
+		<script>
+			SyntaxHighlighter.defaults['gutter'] = true;
+			SyntaxHighlighter.defaults['smart-tabs'] = true;
+			SyntaxHighlighter.defaults['toolbar'] = false;
+			SyntaxHighlighter.all()
+
+
+			//example 1 
+			$('#loginform').guardian();
+			
+						
+		</script> 		
+<script type="text/javascript" src="js/scripts.js"></script> 
+</body>
+</html>

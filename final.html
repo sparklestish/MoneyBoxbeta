@@ -1,0 +1,296 @@
+
+<html>
+<head>
+ <meta charset="utf-8"> 
+ <title>Get Loan</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" type="text/css" href="css/normalize.css"> 
+ <link rel="stylesheet" type="text/css" href="css/framework.css">
+ <link rel="stylesheet" type="text/css" href="css/styles.css"> 
+ <script src="js/webfont.js"></script> <script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script>
+ <script type="text/javascript" src="js/modernizr.js"></script> 
+ <link rel="shortcut icon" type="image/x-icon" href="images/logo.ico">
+ <link rel="apple-touch-icon" href="images/logo.ico"> <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+ <link href="css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+  <style type="text/css">
+    #preloader {
+  position:fixed;
+  z-index:2500;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color:#FFF; 
+  z-index:99999999; 
+}
+
+#status {
+  position:fixed;
+  z-index:99999999;
+  width:250px;
+  height:250px;
+  position:absolute;
+  left:50%; 
+  top:50%; 
+  background-image:url('images/status.gif'); 
+  background-size:32px 32px;
+  background-repeat:no-repeat;
+  background-position:center;
+  margin:-125px 0 0 -125px; 
+}
+
+.center-text{ 
+  text-align:center;
+}
+
+#status p{
+  top:60%;
+}
+
+#status em{
+  font-size:10px!important;
+  display:block;
+  font-style:normal;
+}
+
+  </style>
+  <script type="text/javascript" src="js/jq.js"></script> 
+  <script type="text/javascript" language="javascript">
+
+   $(document).ready(function() {
+ 
+  function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+//var phone = window.location.search.substring(7);
+
+var phone = getQueryVariable("phone");
+var password = getQueryVariable("password");
+var firstname = getQueryVariable("firstname");
+var lastname = getQueryVariable("lastname");
+var email = getQueryVariable("email");
+var item_name = getQueryVariable("item_name");
+var item_image = getQueryVariable("item_image");
+var item_desc = getQueryVariable("item_desc");
+var branch = getQueryVariable("branch");
+var brand = getQueryVariable("brand");
+var category = getQueryVariable("category");
+var condition = getQueryVariable("condition");
+var loanamount = getQueryVariable("loanamount");
+var termofdays = getQueryVariable("termofdays");
+var totalamount = getQueryVariable("totalamount");
+
+
+ // alert(item_desc);
+// alert(password);
+//var anchor = document.getElementById('stage1');
+ //    $('#firstname').val(firstname);
+ //     $('#lastname').val(lastname);
+ // $('#item_name').val(item_name);
+ //  $('#item_image').val(item_image);
+ //   $('#camera_status').val(camera_status);
+ //  $('#item_desc').val(item_desc);
+ //   $('#branch').val(branch);
+
+ //    $('#brand').val(brand);
+ //     $('#branch').val(branch);
+ //      $('#condition').val(condition);
+ //       $('#category').val(category);
+ //        $('#loanamount').val(loanamount);
+ //         $('#termofdays').val(termofdays);
+ //          $('#totalamount').val(totalamount);
+
+
+ // document.getElementById('phone').value = phone;
+
+ // document.getElementById('password').value = password;
+
+ // document.getElementById('firstname').value = firstname;
+
+ // document.getElementById('lastname').value = lastname;
+
+ // document.getElementById('email').value = email;
+
+ // document.getElementById('item_name').value = item_name;
+
+ // document.getElementById('item_image').value = item_image;
+
+ //  document.getElementById('camera_status').value = camera_status;
+
+ // document.getElementById('item_desc').value = item_desc;
+
+ // document.getElementById('branch').value = branch;
+
+ // document.getElementById('brand').value = brand;
+
+ // document.getElementById('category').value = category;
+
+ // document.getElementById('condition').value = condition;
+
+ // document.getElementById('loanamount').value = loanamount;
+
+ // document.getElementById('termofdays').value = termofdays;
+//alert(loanamount);
+ // document.getElementById('totalamount').value = totalamount;
+   $.ajax({
+        type: "GET",
+        url: "http://moneybox.envisiongh.net/requestloan.php",
+        data: "phone="+phone+"&password="+password+"&firstname="+firstname+"&lastname="+lastname+"&email="+email+"&item_name="+item_name+"&item_image="+item_image+"&item_desc="+item_desc+"&branch="+branch+"&brand="+brand+"&category="+category+"&condition="+condition+"&loanamount="+loanamount+"&termofdays="+termofdays+"&totalamount="+totalamount,
+        crossDomain: true,
+        cache: false,
+        dataType:'json',
+        beforeSend: function(){ $("#finalprocess").val('Requesting Loan Application From Our Servers...');},
+        success: function(data){
+          if(data.success == false) 
+                {  
+                  $(".w-form-done").css("display", "block");
+            $(".w-form-done").css("margin-bottom", "15px");
+            $(".w-form-done").css("padding", "10px");
+            $(".w-form-done").css("background-color", "#E21C3C");
+            $(".w-form-done").html('<p style="color: #ffffff;">Your Loan Application Hass Been Submitted</p>');
+            //alert("Login error");
+           // $("#finalprocess").hide();
+    //                window.setTimeout(function(){
+
+    //     // Move to a new location or you can do something else
+    //     window.location.href = "home.html?phone="+phone+"&password="+password;
+
+    // }, 5000);
+                } 
+                else { 
+                       $(".w-form-done").css("display", "block");
+            $(".w-form-done").css("margin-bottom", "15px");
+            $(".w-form-done").css("padding", "10px");
+            $(".w-form-done").css("background-color", "#E21C3C");
+            $(".w-form-done").html('<p style="color: #ffffff;">There was an error in processing your request.</p>');
+            //alert("Login error");
+           // $("#finalprocess").hide();
+    //         window.setTimeout(function(){
+
+    //     // Move to a new location or you can do something else
+    //     window.location.href = "home.html?phone="+phone+"&password="+password;
+
+    // }, 5000);
+
+                    }  
+        }
+      });
+   //return false;
+//var id = $('#stage1').attr('id');
+     // $("#2").click(function(event){
+  //alert(phone);
+        //alert(loanamount);
+
+        var homelink = document.getElementById('homelink'); //or grab it by tagname etc
+    homelink.href = "home.html?phone="+phone+"&password="+password;
+
+
+     var settingslink = document.getElementById('settingslink'); //or grab it by tagname etc
+    settingslink.href = "settings.html?phone="+phone+"&password="+password;
+ //document.getElementById('phone').value = jd.phone;
+
+             //     $('#stage2').append('<p>  ' + jd.what + '</p>');
+             // $('#stage3').append('<p > ' + jd.date+ ' at ' + jd.time+ ' | Venue:' + jd.location+'</p>');
+            
+ //  alert(item_name);             
+             // $('#stage4').append('<p>  ' + jd.detail+ '</p>');
+       
+          //});
+     
+   });
+   </script>
+ </head>
+<body style="background-color:#ffffff;">
+ <section class="w-section mobile-wrapper"> 
+ <div class="page-content" id="main-stack"> 
+ <div class="w-nav navbar" data-collapse="all" data-animation="over-left" data-duration="400" data-contain="1" data-easing="ease-out-quint" data-no-scroll="1"> 
+ <div class="w-container"> 
+ <nav class="w-nav-menu nav-menu bg-gradient" role="navigation">
+ <div class="nav-menu-header"> 
+ <div class="logo"><img style="margin-left:-70px;" src="images/logo.png" width="50px"  height="50px" alt="Money Box Logo"> Money Box</div>
+ </div>
+ <a class="w-clearfix w-inline-block nav-menu-link" id="homelink" href="" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-ios-home-outline"></div>
+ </div>
+ <div class="nav-menu-titles">Home Page</div></a>  
+ 
+  <a class="w-clearfix w-inline-block nav-menu-link"  href="#" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-android-checkmark-circle"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Check Status</div></a> 
+ 
+ <a class="w-clearfix w-inline-block nav-menu-link" href="#" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-social-facebook-outline"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Social Media</div></a> 
+ 
+   <a class="w-clearfix w-inline-block nav-menu-link" href="#" data-load="1"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-ios-color-wand"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Auction</div></a> 
+ 
+ 
+ 
+ <a class="w-clearfix w-inline-block nav-menu-link" id="settingslink" href="" data-load="1"> 
+ <div class="icon-list-menu"> <div class="icon ion-ios-gear-outline"></div>
+ </div>
+ <div class="nav-menu-titles">Settings</div></a> 
+ <a class="w-clearfix w-inline-block nav-menu-link last" href="terms.html" data-load="1">
+ <div class="icon-list-menu">
+ <div class="icon ion-ios-bookmarks-outline"></div>
+ </div>
+ <div class="nav-menu-titles">Terms and Conditions</div></a> 
+ 
+<!--     <a class="w-clearfix w-inline-block nav-menu-link" href="login.html" data-load="3"> 
+ <div class="icon-list-menu"> 
+ <div class="icon ion-ios-download-outline"></div>
+ </div>
+ 
+ <div class="nav-menu-titles">Logout</div></a>  -->
+
+
+ <div class="separator-bottom"></div><div class="separator-bottom"></div>
+ <div class="separator-bottom"></div>
+ </nav> 
+ <div class="wrapper-mask" data-ix="menu-mask"></div>
+ <div class="navbar-title">LOAN APPLICATION REVIEW</div>
+ <div class="w-nav-button navbar-button left" id="menu-button" data-ix="hide-navbar-icons"> 
+ <div class="navbar-button-icon home-icon">
+ <div class="bar-home-icon top"></div>
+ <div class="bar-home-icon middle"></div><div class="bar-home-icon bottom"></div></div></div></div></div><div class="body padding"> <div class="w-form"> 
+ 
+ 
+ <div class="w-form-done"> 
+ </div>
+  <div class="w-button action-button" id="finalprocess" style="border-radius: 10px; background-color: #ffbf00; padding:10px; height:80px;"> CONGRATS!!!, YOU HAVE SUCCESSFULLY APPLIED FOR A LOAN.
+ </div>
+ <div class="separator-button-input"></div>
+
+
+ 
+ </div>
+ </div>
+ </div>
+<!--  <div class="page-content loading-mask" id="new-stack"> <div class="loading-icon">
+ <div class="navbar-button-icon icon ion-load-d"></div>
+ </div>
+ </div> -->
+ </section> 
+<script type="text/javascript" src="js/framework.js"></script> 
+<script type="text/javascript" src="js/scripts.js"></script>  
+ </body>
+ </html>
