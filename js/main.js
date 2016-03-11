@@ -1,11 +1,9 @@
 
 var serverURL = "http://moneyboxapp.envisiongh.net/test-database/";  // please change this to your server address.
 
-
 var file;          /* this will save the image file when the user selects input from files*/
 var isFromCamera;  /* a flag to indicate that the file is from the camera */
 var imageSavedURI; /* this saves the image URI for uploading when using the camera */
-var username;      /* hold the name of the user */
 var firstname;
 var lastname;
 var email;
@@ -27,6 +25,8 @@ var loanamount;
  *
  */
 function enableContinue() {
+    //alert(imageSavedURI);
+    drawImage(imageSavedURI);
     document.getElementById("continue-btn").style.display = "inline-block";
 }
 
@@ -44,14 +44,12 @@ function enableContinue() {
  */
 function loadFromFiles(event) {
 
-
     var fileInput = event.target.files; // get the input files
     if (fileInput.length > 0) { // check if we have at least one file
         isFromCamera = false;
         file = event.target.files[0]; // save to the global variable the file we need.
         var windowURL = window.URL || window.webkitURL;
         imageSavedURI = windowURL.createObjectURL(fileInput[0]);
-        
         enableContinue(); // finally enable the user to continue to review page.
     }
 }
@@ -142,10 +140,14 @@ function uploadPhoto(){
 
         ft.upload(imageSavedURI, encodeURI(serverURL + "upload.php"),
             function (e) {
-                alert("Image uploaded");
+                alert("Loan Application submitted successfully");
+                setTimeout(function(){
+                    document.href="../collateral.html";
+                        //do what you need here
+                    }, 2000);
             },
             function (e) {
-                alert("Upload failed");
+                alert("Form Submission Interrupted");
             }, 
             options
         );
@@ -180,7 +182,7 @@ function uploadPhoto(){
 function progressHandler(event){
     var percent = (event.loaded / event.total) * 100;
     if (percent == 100)
-        alert("Image uploaded");
+        alert("Loan Application submitted successfully");
 }
 function completeHandler(event){
     alert(event.target.responseText);
@@ -229,75 +231,84 @@ function loadReviewPage() {
 
     var newPage = document.createElement("div");
     newPage.setAttribute("id", "current-page");
+    newPage.setAttribute("class", "w-form");
+    newPage.setAttribute("style", "text-align: center;")
     var title = document.createElement("div");
-    title.setAttribute("class", "navbar-title");
     var titleText = document.createTextNode("Loan Application Review");
     title.appendChild(titleText);
     newPage.appendChild(title);
 
-    var reviewForm = document.createElement("div");
-    reviewForm.setAttribute("class", "w-form");
-
-
     var name = document.createElement("h4");
+    name.setAttribute("class", "label-form bold");
     var nameText = document.createTextNode("First Name: " + firstname);
     name.appendChild(nameText);
     newPage.appendChild(name);
 
-     var name2 = document.createElement("h4");
+    var name2 = document.createElement("h4");
+    name2.setAttribute("class", "label-form bold");
     var nameText2 = document.createTextNode("Last Name: " + lastname);
     name2.appendChild(nameText2);
-    newPage2.appendChild(name2);
+    newPage.appendChild(name2);
 
 
-     var name3 = document.createElement("h4");
+    var name3 = document.createElement("h4");
+    name3.setAttribute("class", "label-form");
     var nameText3 = document.createTextNode("Email: " + email);
     name3.appendChild(nameText3);
-    newPage3.appendChild(name3);
+    newPage.appendChild(name3);
 
-     var name4 = document.createElement("h4");
+    var name4 = document.createElement("h4");
+    name4.setAttribute("class", "label-form bold");
     var nameText4 = document.createTextNode("Phone: " + phone);
     name4.appendChild(nameText4);
-    newPage4.appendChild(name4);
+    newPage.appendChild(name4);
 
-     var name5 = document.createElement("h4");
+    var name5 = document.createElement("h4");
+    name5.setAttribute("class", "label-form bold");
     var nameText5 = document.createTextNode("Item Name: " + item_name);
     name5.appendChild(nameText5);
-    newPage5.appendChild(name5);
+    newPage.appendChild(name5);
 
-     var name6 = document.createElement("h4");
+    var name6 = document.createElement("h4");
+    name6.setAttribute("class", "label-form bold");
     var nameText6 = document.createTextNode("Item Description: " + item_desc);
     name6.appendChild(nameText6);
-    newPage6.appendChild(name6);
+    newPage.appendChild(name6);
 
-     var name7 = document.createElement("h4");
+    var name7 = document.createElement("h4");
+    name7.setAttribute("class", "label-form bold");
     var nameText7 = document.createTextNode("Brand: " + brand);
     name7.appendChild(nameText7);
-    newPage7.appendChild(name7);
+    newPage.appendChild(name7);
 
-     var name8 = document.createElement("h4");
+    var name8 = document.createElement("h4");
+    name8.setAttribute("class", "label-form bold");
     var nameText8 = document.createTextNode("Category: " + category);
     name8.appendChild(nameText8);
-    newPage8.appendChild(name8);
+    newPage.appendChild(name8);
 
-     var name9 = document.createElement("h4");
+    var name9 = document.createElement("h4");
+    name9.setAttribute("class", "label-form bold");
     var nameText9 = document.createTextNode("Condition: " + condition);
     name9.appendChild(nameText9);
-    newPage9.appendChild(name9);
+    newPage.appendChild(name9);
 
 
-     var name10 = document.createElement("h4");
+    var name10 = document.createElement("h4");
+    name10.setAttribute("class", "label-form bold");
     var nameText10 = document.createTextNode("Branch: " + branch);
     name10.appendChild(nameText10);
-    newPage10.appendChild(name10);
+    newPage.appendChild(name10);
 
-     var name11 = document.createElement("h4");
+    var name11 = document.createElement("h4");
+    name11.setAttribute("class", "label-form bold");
     var nameText11 = document.createTextNode("Loan Amount: " + loanamount);
     name11.appendChild(nameText11);
-    newPage11.appendChild(name11);
+    newPage.appendChild(name11);
 
     var canvas = document.createElement("canvas");
-    canvas.setAttribute("id", "image-canvas");
+    canvas.setAttribute("id", "image-canvas bold");
+    canvas.setAttribute("style", "width: 100%;");
     newPage.appendChild(canvas);
     reviewPage.appendChild(newPage);
     drawImage(imageSavedURI);
